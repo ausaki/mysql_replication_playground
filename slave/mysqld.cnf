@@ -1,0 +1,3 @@
+[mysqld]
+log-bin='slave'
+server-id=100

@@ -1,0 +1,29 @@
+version: "3"
+services:
+  mysql_master:
+    image: mysql:8
+    volumes:
+      - "./master/mysqld.cnf:/etc/mysql/conf.d/mysqld.cnf"
+    container_name: mysql_master
+    hostname: mysql_master
+    environment: 
+      MYSQL_ROOT_PASSWORD: "root1234"
+    networks:
+      mysql_cluster:
+        ipv4_address: "192.168.200.101"
+  mysql_slave:
+    image: mysql:8
+    volumes:
+      - "./slave/mysqld.cnf:/etc/mysql/conf.d/mysqld.cnf"
+    container_name: mysql_slave
+    hostname: mysql_slave
+    environment: 
+      MYSQL_ROOT_PASSWORD: "root1234"
+    networks:
+      mysql_cluster:
+        ipv4_address: "192.168.200.102"
+networks:
+  mysql_cluster:
+    ipam:
+      config:
+        - subnet: "192.168.200.0/24"
