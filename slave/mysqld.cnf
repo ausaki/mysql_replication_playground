@@ -1,3 +1,4 @@
 [mysqld]
 log-bin='slave'
+relay-log='slave_relay-bin'
 server-id=100
